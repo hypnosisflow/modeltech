@@ -1,12 +1,12 @@
 export const authors = [
-  { name: "jony", code: "JONY" },
-  { name: "tony", code: "TONY" },
-  { name: "pony", code: "PONY" },
+  { name: "jony", code: "jony" },
+  { name: "tony", code: "tony" },
+  { name: "pony", code: "pony" },
 ];
 
 export const weatherOptions = [
-  { name: "sunny", code: "SUN" },
-  { name: "snowy", code: "SNOW" },
-  { name: "rainy", code: "RAIN" },
-  { name: "cloudy", code: "CLOUD" },
+  { name: "sunny", code: "sunny" },
+  { name: "snowy", code: "snowy" },
+  { name: "rainy", code: "rainy" },
+  { name: "cloudy", code: "cloudy" },
 ];

@@ -1,22 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Nullable } from "primereact/ts-helpers";
-
-interface Select {
-  value: string;
-  label: string;
-}
-
-export interface WeatherCard {
-  id: string;
-  date: Nullable<Date> | string;
-  temp: string;
-  weather: string;
-  author: string;
-  comment: string;
-}
-export interface WeatherState {
-  cards: Array<WeatherCard>;
-}
+import { WeatherCard, WeatherState } from "../../models";
 
 const initialState: WeatherState = {
   cards: [],
@@ -40,6 +23,6 @@ export const weatherSlice = createSlice({
   },
 });
 
-export const { init, remove } = weatherSlice.actions;
+export const { init, remove, add } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

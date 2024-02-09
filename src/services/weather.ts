@@ -39,6 +39,14 @@ export const weatherApi = createApi({
       }),
       invalidatesTags: ["fd"],
     }),
+    updateWeatherCard: builder.mutation<WeatherCard, WeatherCard>({
+      query: (card) => ({
+        url: `weather/update/${card.id}`,
+        method: "PATCH",
+        body: card,
+      }),
+      invalidatesTags: ["fd"],
+    }),
   }),
 });
 
@@ -46,5 +54,6 @@ export const {
   useLoadAllQuery,
   useGetWeatherCardQuery,
   useAddWeatherCardMutation,
-  useDeleteWeatherCardMutation
+  useDeleteWeatherCardMutation,
+  useUpdateWeatherCardMutation,
 } = weatherApi;
