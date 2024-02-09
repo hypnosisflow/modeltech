@@ -5,25 +5,9 @@ import { useLoadAllQuery } from "../services/weather";
 export const Graph = () => {
   const { data, isLoading } = useLoadAllQuery();
 
-  const options = {
-    title: {
-      text: "Stacked Area Chart",
-    },
-    xAxis: {
-      type: "category",
-      data: data?.map((item) => item.date),
-    },
-    yAxis: {
-      type: "value",
-      data: data?.map((item) => item.temp),
-    },
-    series: [
-      {
-        data: data?.map((item) => item.temp),
-        type: "bar",
-      },
-    ],
-  };
+  // const genData = (data) => {
+  //   if ()
+  // }
 
   const newOPT = {
     title: {
@@ -48,7 +32,7 @@ export const Graph = () => {
     xAxis: {
       type: "category",
       // boundaryGap: false,
-      data: data?.map((item) => item.date),
+      data: data?.slice(-7).map((item) => item.date),
     },
     yAxis: {
       type: "value",
