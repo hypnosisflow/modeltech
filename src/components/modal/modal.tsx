@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { CustomForm } from "../components/custom-form";
 import { useNavigate } from "react-router-dom";
-import { Dialog } from "primereact/dialog";
 import "./modal.scss";
 
 interface ModalProps {
@@ -24,7 +22,6 @@ export const Modal = ({ theme, children }: ModalProps) => {
         <button className="modal-close" onClick={() => navigate(-1)}>
           <i className="pi pi-times"></i>
         </button>
-        {/* <CustomForm /> */}
         {children}
       </div>
     </div>

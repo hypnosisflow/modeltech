@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import { CustomForm } from "./components/custom-form";
-import { UserCard } from "./components/user-card";
-import { Modal } from "./components/modal";
+import { CustomForm } from "./components/custom-form/custom-form";
+import { UserCard } from "./components/weather-card/weather-card";
+import { Modal } from "./components/modal/modal";
 import { Layout } from "./pages/layout";
 
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
@@ -21,7 +21,7 @@ function App() {
     <>
       <Routes location={state?.backgroundLocation || location}>
         <Route path="/" element={<Layout />} />
-        <Route path="/weather/card" element={<UserCard />} />
+        {/* <Route path="/weather/card" element={<UserCard />} /> */}
       </Routes>
 
       {state?.backgroundLocation && (
@@ -33,6 +33,10 @@ function App() {
           <Route
             path="/weather/:id"
             element={<Modal children={<UserCard />} />}
+          />
+          <Route
+            path="/weather/update/:id"
+            element={<Modal children={<CustomForm editMode={true} />} />}
           />
         </Routes>
       )}

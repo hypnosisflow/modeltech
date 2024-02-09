@@ -6,7 +6,7 @@ const data: WeatherCard = {
   author: "lala",
   comment: "fdsafs",
   date: "19.02.2203",
-  temp: "1",
+  temp: 0,
   weather: "sunny",
 };
 const data2: WeatherCard = {
@@ -14,7 +14,7 @@ const data2: WeatherCard = {
   author: "lala",
   comment: "fdsafs",
   date: "19.02.2203",
-  temp: "-31",
+  temp: 32,
   weather: "not sunny",
 };
 
@@ -23,11 +23,11 @@ const data3: WeatherCard = {
   author: "mana",
   comment: "hi tha man",
   date: "01.01.2010",
-  temp: "55",
+  temp: -23,
   weather: "cloudy",
 };
 
-const arr = [data, data2, data3];
+let arr = [data, data2, data3];
 
 export const handlers = [
   http.get("/", () => {
@@ -44,7 +44,6 @@ export const handlers = [
   http.post("/weather/add", async ({ request }) => {
     // Read the intercepted request body as JSON.
     const newPost = (await request.json()) as WeatherCard;
-    console.log(newPost);
 
     // Push the new post to the map of all posts.
     arr.push(newPost);
@@ -54,10 +53,20 @@ export const handlers = [
     return HttpResponse.json(arr, { status: 201 });
   }),
 
+  http.patch("/weather/update/:id", async ({ request }) => {
+    const updatedPost = (await request.json()) as WeatherCard;
+    const filtered = arr.filter((i) => i.id !== updatedPost.id);
+    filtered.push(updatedPost);
+
+    arr = filtered;
+
+    return HttpResponse.json(arr, { status: 201 });
+  }),
+
   http.delete("/weather/:id", async ({ params }) => {
     const { id } = params;
     const items = arr.filter((i) => i.id !== id);
-
+    arr = items;
     return HttpResponse.json(items, { status: 201 });
   }),
 ];

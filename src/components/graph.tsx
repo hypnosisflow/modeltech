@@ -3,7 +3,7 @@ import ReactEcharts from "echarts-for-react";
 import { useLoadAllQuery } from "../services/weather";
 
 export const Graph = () => {
-  const { data, error, isLoading } = useLoadAllQuery();
+  const { data, isLoading } = useLoadAllQuery();
 
   const options = {
     title: {
@@ -25,6 +25,56 @@ export const Graph = () => {
     ],
   };
 
+  const newOPT = {
+    title: {
+      text: "График погоды",
+    },
+    toolTip: {
+      trigger: "axis",
+    },
+    legend: {},
+    toolBox: {
+      show: true,
+      feature: {
+        dataZoom: {
+          yAxisIndex: "none",
+          dataView: { readOnly: false },
+          magicType: { type: ["line", "bar"] },
+          resotre: {},
+          saveAsImage: {},
+        },
+      },
+    },
+    xAxis: {
+      type: "category",
+      // boundaryGap: false,
+      data: data?.map((item) => item.date),
+    },
+    yAxis: {
+      type: "value",
+      data: data?.map((item) => item.temp),
+      // axisLabel: {
+      //   formatter: "{value} C",
+      // },
+    },
+    series: [
+      {
+        name: "Изменения температуры",
+        type: "line",
+        data: data?.map((item) => item.temp),
+        markPoint: {
+          data: [
+            { type: "max", name: "Max" },
+            { type: "min", name: "Min" },
+          ],
+        },
+        markLine: {
+          data: [{ type: "average", name: "Avg" }],
+        },
+      },
+    ],
+  };
+
   if (isLoading)
     return (
       <div>
@@ -35,10 +85,10 @@ export const Graph = () => {
   return (
     <div className="mt-8">
       <ReactEcharts
-        option={options}
+        option={newOPT}
         style={{
-          width: "600px",
-          //   height: "300px",
+          width: "1200px",
+          height: "400px",
         }}
       ></ReactEcharts>
     </div>
