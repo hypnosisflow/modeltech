@@ -13,8 +13,8 @@ import {
   useGetWeatherCardQuery,
 } from "../../services/weather";
 
-import { WeatherCard } from "../../store/features/weather-cards";
 import { authors, weatherOptions } from "../../constants";
+import { WeatherCard } from "../../models";
 
 export const CustomForm = ({ editMode = false }) => {
   const { id } = useParams();
@@ -51,6 +51,16 @@ export const CustomForm = ({ editMode = false }) => {
     comment: comment,
   };
 
+  const validateTemp = (e: SyntheticEvent<HTMLButtonElement>) => {
+    if (temp >= 60 || temp <= -50) {
+      alert(
+        "Число должно быть больше -50 и меньше 60. Допускается два символа после запятой."
+      );
+      e.preventDefault();
+      return;
+    }
+  };
+
   const handlePost = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -63,6 +73,7 @@ export const CustomForm = ({ editMode = false }) => {
 
   const handleEdit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
       updateWeatherCard(data);
       navigate(-1);
@@ -93,8 +104,7 @@ export const CustomForm = ({ editMode = false }) => {
           onValueChange={(e) => setTemp(e.value)}
           placeholder="Введите температуру"
           required
-          min={-50}
-          max={60}
+          maxFractionDigits={2}
         />
         <Dropdown
           value={author}
@@ -120,6 +130,7 @@ export const CustomForm = ({ editMode = false }) => {
         <Button
           type="submit"
           label="Отправить"
+          onClick={(e) => validateTemp(e)}
           rounded
           className="w-10rem mx-auto"
         />

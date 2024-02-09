@@ -3,7 +3,7 @@ describe("CustomForm component", () => {
     cy.visit("http://localhost:5173");
 
     // дергаем форму начиная флоу с главной
-    cy.get("a").contains("Add new").click();
+    cy.get("a").contains("Добавить запись").click();
 
     cy.get("input[placeholder='Выберите дату']").click();
     cy.get("td").contains("12").click();
