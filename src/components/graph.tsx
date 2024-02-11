@@ -5,9 +5,7 @@ import { useLoadAllQuery } from "../services/weather";
 export const Graph = () => {
   const { data, isLoading } = useLoadAllQuery();
 
-  // const genData = (data) => {
-  //   if ()
-  // }
+
 
   const newOPT = {
     title: {
