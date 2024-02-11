@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./modal.scss";
 
 interface ModalProps {
-  theme?: string;
   children: React.ReactNode;
 }
 
-export const Modal = ({ theme, children }: ModalProps) => {
+export const Modal = ({ children }: ModalProps) => {
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   window.addEventListener("click", (event) => {
-  //     if (event.target.id || event.currentTarget.id !===)
-  //   })
-  // })
 
   return (
     <div className="modal-overlay">

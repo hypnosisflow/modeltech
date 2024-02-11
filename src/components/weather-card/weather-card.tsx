@@ -9,10 +9,9 @@ import { Button } from "primereact/button";
 import { CustomLink } from "../custom-link/custom-link";
 import "./weather-card.scss";
 
-
 export const UserCard = () => {
   const { id } = useParams();
-  const { data: user, isLoading, error } = useGetWeatherCardQuery(id as string);
+  const { data: card, isLoading, error } = useGetWeatherCardQuery(id as string);
   const [deleteWeatherCard] = useDeleteWeatherCardMutation();
 
   const navigate = useNavigate();
@@ -42,7 +41,7 @@ export const UserCard = () => {
     );
   }
 
-  if (user) {
+  if (card) {
     return (
       <div className="weather-card">
         <h3>Карточка погоды</h3>
@@ -50,34 +49,34 @@ export const UserCard = () => {
         <div className="weather-card-col">
           <div className="weather-card-row">
             <span>ID заявки</span>
-            <span>{user.id}</span>
+            <span>{card.id}</span>
           </div>
           <div className="weather-card-row">
             <span>Автор </span>
-            <span> {user.author}</span>
+            <span> {card.author}</span>
           </div>
           <div className="weather-card-row">
             <span>Коментарий </span>
-            <span> {user.comment}</span>
+            <span> {card.comment}</span>
           </div>
           <div className="weather-card-row">
             <span>Дата </span>
-            <span> {user.date?.toLocaleString()}</span>
+            <span> {card.date?.toLocaleString()}</span>
           </div>
           <div className="weather-card-row">
             <span>Температура </span>
-            <span> {user.temp}</span>
+            <span> {card.temp}</span>
           </div>
           <div className="weather-card-row">
             <span>Погода </span>
-            <span> {user.weather}</span>
+            <span> {card.weather}</span>
           </div>
         </div>
 
         <div className="buttons-wrapper">
           <CustomLink
             value="Редактировать"
-            path={`/weather/update/${user.id}`}
+            path={`/weather/update/${card.id}`}
             state={{ backgroundLocation: "/" }}
             theme="def"
           />
